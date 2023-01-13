@@ -3,13 +3,11 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import { PostCard, Categories, PostWidget } from './components'
+import { getPosts } from '../services';
 
 const inter = Inter({ subsets: ['latin'] })
-const posts = [
-  { title: 'The Spiritual Journey', excerpt: 'The awakening of my journey' },
-  { title: 'Jane Eyre: Not a Cinderella Story', excerpt: 'Resume of the legendary novel by Charlotte Bronte, Jane Eyre' },
-];
-export default function Home() {
+
+export default function Home({ posts }) {
   return (
 
     <div className='container mx-auto px-10 mb-8'>
@@ -21,7 +19,7 @@ export default function Home() {
       </Head>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
         <div className='lg:col-span-8 col-span-1'>
-          {posts.map((post) => <PostCard post = {post} key={post.title} />)}
+          {posts.map((post) => <PostCard post = {post.node} key={post.title} />)}
         </div>
         <div className='lg:col-span-4 col-span-1'>
             <div className='lg:sticky relative top-8'>
@@ -32,4 +30,12 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export async function getStaticProps(){
+  const posts = (await getPosts()) || [];
+
+  return{
+    props: {posts}
+  }
 }
