@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 const FeaturedPosts = ({ post }) => {
     return (
-        <div className='relative h-72'>
-            <div className='absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72 blur-sm' style={{ backgroundImage: `url('${post.featuredImage.url}')` }} />
+        <div className='relative h-72 hover:scale-105 ease-in duration-300'>
+            <div className='absolute rounded-lg bg-center bg-no-repeat bg-cover shadow-md inline-block w-full h-72 bg bg-black/70 bg-blend-overlay ' style={{ backgroundImage: `url('${post.featuredImage.url}')` }} />
             <div className='flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full'>
                 <p className='text-white mb-4 text-shadow font-semibold text-xs'>{moment(post.createdAt).format('MMM DD, YYYY')}</p>
                 <p className='text-white mb-4 text-shadow font-semibolld text-2xl text-center'>{post.title}</p>
